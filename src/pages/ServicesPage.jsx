@@ -10,6 +10,7 @@ const ServicesPage = () => {
   const [isInfoModalOpen, setIsInfoModalOpen] = useState(false);
   const [selectedService, setSelectedService] = useState(null);
   const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
+  const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
   const [showAllServices, setShowAllServices] = useState(false);
 
   const services = [
@@ -47,8 +48,12 @@ const ServicesPage = () => {
   };
 
   const handleRequestSubmit = () => {
-    setIsModalOpen(false); // Close the form modal
-    setIsConfirmationModalOpen(true); // Show confirmation modal
+    setIsModalOpen(false);
+    setIsConfirmationModalOpen(true);
+    setTimeout(() => {
+      setIsConfirmationModalOpen(false);
+      setIsSuccessModalOpen(true);
+    }, 2000);
   };
 
   const handleSeeMoreClick = () => {
@@ -71,7 +76,12 @@ const ServicesPage = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-8">
             {servicesToDisplay.map((service, index) => (
               <div key={index} className="bg-white p-6 rounded-lg shadow-lg transition-all transform hover:scale-105">
-                <h3 className="text-2xl font-semibold text-gray-800">{service.title}</h3>
+                <div className="flex items-center mb-4">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="w-14 h-14 text-blue-600 mr-3" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M10 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-8l-2-2z" />
+                  </svg>
+                  <h3 className="text-2xl font-semibold text-gray-800">{service.title}</h3>
+                </div>
                 <p className="text-gray-700 mb-4">{service.description}</p>
                 <button onClick={() => toggleInfoModal(service)} className="text-blue-600 hover:underline">Learn More</button>
                 <button onClick={() => toggleModal(service)} className="mt-4 w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition">Apply!</button>
@@ -88,25 +98,13 @@ const ServicesPage = () => {
         </div>
       </section>
 
-      {/* Apply Form Modal */}
-      {isModalOpen && selectedService && (
-        <div className="fixed inset-0 flex items-center justify-center z-50">
-          <div className="absolute inset-0 bg-black opacity-50 z-40" />
-          <div className="bg-white p-6 rounded-lg shadow-lg max-w-md w-full z-50">
-            <h2 className="text-xl font-bold mb-4">Enter Your Details</h2>
-            {selectedService.component}
-          </div>
-        </div>
-      )}
-
-      {/* Confirmation Modal */}
-      {isConfirmationModalOpen && (
+      {isSuccessModalOpen && (
         <div className="fixed inset-0 flex items-center justify-center z-50">
           <div className="absolute inset-0 bg-black opacity-50 z-40" />
           <div className="bg-white p-6 rounded-lg shadow-lg max-w-md w-full z-50 text-center">
-            <h2 className="text-xl font-bold text-green-600">Request Sent!</h2>
-            <p className="text-gray-700 mt-2">Your request has been successfully submitted.</p>
-            <button className="mt-4 w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition" onClick={() => setIsConfirmationModalOpen(false)}>Close</button>
+            <h2 className="text-xl font-bold text-green-600">Success!</h2>
+            <p className="text-gray-700 mt-2">Your request has been successfully processed.</p>
+            <button className="mt-4 w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition" onClick={() => setIsSuccessModalOpen(false)}>Close</button>
           </div>
         </div>
       )}
