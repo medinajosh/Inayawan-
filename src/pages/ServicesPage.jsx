@@ -71,6 +71,14 @@ const ServicesPage = () => {
     setIsInfoModalOpen(!isInfoModalOpen);
   };
 
+  //show confirmation
+  const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
+
+  const handleRequestSubmit = () => {
+    setIsModalOpen(false); // Close the form modal
+    setIsConfirmationModalOpen(true); // Show confirmation modal
+  };
+
  
 
   const handleSeeMoreClick = () => {
@@ -183,6 +191,22 @@ const ServicesPage = () => {
           </div>
         </div>
       )}
+
+        {isConfirmationModalOpen && (
+          <div className="fixed inset-0 flex items-center justify-center z-50">
+            <div className="absolute inset-0 bg-black opacity-50 z-40" />
+            <div className="bg-white p-6 rounded-lg shadow-lg max-w-md w-full z-50 text-center">
+              <h2 className="text-xl font-bold text-green-600">Request Sent!</h2>
+              <p className="text-gray-700 mt-2">Your request has been successfully submitted.</p>
+              <button
+                className="mt-4 w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition"
+                onClick={() => setIsConfirmationModalOpen(false)}
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        )}
 
 
 
