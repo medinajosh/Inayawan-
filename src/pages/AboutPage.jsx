@@ -41,8 +41,11 @@ const AboutPage = () => {
       {/* Officials Section - Carousel */}
       <OfficialsSection />
 
+
       {/* Milestone Section  */} 
       <Milestone/>
+
+      
       
 
       <Footer /> {/* Footer Component */}
