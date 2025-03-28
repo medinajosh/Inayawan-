@@ -98,14 +98,13 @@ const ServicesPage = () => {
         </div>
       </section>
 
-      {isModalOpen && selectedService && (
+      {isInfoModalOpen && selectedService && (
         <div className="fixed inset-0 flex items-center justify-center z-50">
           <div className="absolute inset-0 bg-black opacity-50 z-40" />
           <div className="bg-white p-6 rounded-lg shadow-lg max-w-md w-full z-50">
             <h2 className="text-xl font-bold mb-4">{selectedService.title}</h2>
             <p className="text-gray-700 mb-4">{selectedService.instructions}</p>
-            {selectedService.component}
-            <button className="mt-4 w-full bg-gray-600 text-white py-2 px-4 rounded-lg hover:bg-gray-700 transition" onClick={() => setIsModalOpen(false)}>Close</button>
+            <button className="mt-4 w-full bg-gray-600 text-white py-2 px-4 rounded-lg hover:bg-gray-700 transition" onClick={() => setIsInfoModalOpen(false)}>Close</button>
           </div>
         </div>
       )}
